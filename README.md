@@ -16,18 +16,20 @@ We are going to use data from the **[AI4I 2020 Predictive Maintenance Dataset â€
 The dataset variables are:
 - UID
 - Product ID
-- Type
-- Air temperature [K]
-- Process temperature [K]
-- Rotational speed [rpm]
-- Torque [Nm]
-- Tool wear [min]
-- Machine failure
-- TWF
-- HDF
-- PWF
-- OSF
-- RNF
+- Features
+    - Type
+    - Air temperature [K]
+    - Process temperature [K]
+    - Rotational speed [rpm]
+    - Torque [Nm]
+    - Tool wear [min]
+- Targets
+    - Machine failure
+    - TWF
+    - HDF
+    - PWF
+    - OSF
+    - RNF
 
 ## Problem Type
 This is a **binary classification** problem. 
