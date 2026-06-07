@@ -1,0 +1,25 @@
+[project]
+name = "predictive-maintenance-ml"
+version = "0.1.0"
+description = "A predictive maintenance machine learning project using Python, scikit-learn, and structured experiment design."
+readme = "README.md"
+authors = [
+    { name = "Cecilia Botta" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.9",
+    "numpy>=2.4.6",
+    "pandas>=3.0.3",
+    "scikit-learn>=1.9.0",
+    "ucimlrepo>=0.0.7",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.19,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
