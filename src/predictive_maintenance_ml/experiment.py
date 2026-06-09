@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from predictive_maintenance_ml.data_loader import AI4IDataLoader
 from predictive_maintenance_ml.feature_engineering import FeaturePreprocessor
 from predictive_maintenance_ml.model import BaselineClassifier
+from predictive_maintenance_ml.evaluation import ClassificationEvaluator
 
 
 class BaselineExperiment:
@@ -81,14 +82,27 @@ class BaselineExperiment:
         }
     
     
-# def main() -> None:
-#     experiment = BaselineExperiment()
-#     results = experiment.run()
+def main() -> None:
+    experiment = BaselineExperiment()
+    results = experiment.run()
 
-#     print("y_test shape:", results["y_test"].shape)
-#     print("y_pred shape:", results["y_pred"].shape)
-#     print("y_proba shape:", results["y_proba"].shape)
+    evaluator = ClassificationEvaluator()
+    metrics = evaluator.evaluate(
+        y_true=results["y_test"],
+        y_pred=results["y_pred"],
+        y_proba=results["y_proba"],
+    )
+
+    print("Accuracy:", metrics["accuracy"])
+    print("Precision:", metrics["precision"])
+    print("Recall:", metrics["recall"])
+    print("F1:", metrics["f1"])
+    print("ROC-AUC:", metrics["roc_auc"])
+    print("Confusion matrix:")
+    print(metrics["confusion_matrix"])
+    print("Classification report:")
+    print(metrics["classification_report"])
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
