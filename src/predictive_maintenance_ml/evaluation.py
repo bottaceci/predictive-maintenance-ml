@@ -37,3 +37,37 @@ class ClassificationEvaluator:
                 zero_division=0,
             ),
         }
+    
+    def evaluate_thresholds(
+        self,
+        y_true: pd.Series | np.ndarray,
+        y_proba: np.ndarray,
+        thresholds: np.ndarray | None = None,
+    ) -> pd.DataFrame:
+        """Evaluate classification metrics across decision thresholds."""
+
+        if thresholds is None:
+            thresholds = np.arange(0.1, 1.0, 0.1)
+
+        rows = []
+
+        for threshold in thresholds:
+            y_pred = (y_proba >= threshold).astype(int)
+
+            tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0,1]).ravel()
+
+            row = {
+                "threshold": threshold,
+                "accuracy": accuracy_score(y_true, y_pred),
+                "precision": precision_score(y_true, y_pred, zero_division=0),
+                "recall": recall_score(y_true, y_pred, zero_division=0),
+                "f1": f1_score(y_true, y_pred, zero_division=0),
+                "true_negatives": tn,
+                "false_positives": fp,
+                "false_negatives": fn,
+                "true_positives": tp,
+            }
+
+            rows.append(row)
+
+        return pd.DataFrame(rows)
